@@ -4,8 +4,7 @@
 
   become: true
 
-  vars_files:
-   - files/secrets/credentials.yml
+  vars:
 
   pre_tasks:
     - name: install Epel repo
