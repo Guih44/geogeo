@@ -7,3 +7,5 @@ git config --global user.name "dirane"
 git commit -m "webapp first version"
 git add origin
 git push origin master
+
+ansible-playbook -i hosts.yml deploy.yml
