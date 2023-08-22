@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="show_sql">false</property>
+    <property name="current_session_context_class">thread</property>
+    <property name="dialect">org.hibernate.dialect.MariaDB106Dialect</property>
+    <!--
+	  connexion via jndi (cf. server.xml)
+    -->
+    <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
+    <property name="hibernate.connection.datasource">java:comp/env/jdbc/geotrackDB</property>
+    <property name="hibernate.connection.username">{{ bdd_username }}</property>
+    <property name="hibernate.connection.password">{{ bdd_password }}</property>
+    <property name="preferredTestQuery">select 1 from dual</property>
+    <!-- //A way to configure the test connection -->
+    <!-- To improve the performance of the configuration: -->
+    <property name="jdbc.fetch_size">50</property>
+    <!-- //Reading: the number of records in the database each time out from the. -->
+    <property name="jdbc.batch_size">20</property>
+    <!-- //Write: when bulk delete, batch updates and bulk insert batch size -->
+    <property name="hibernate.order_inserts">true</property>
+    <property name="hibernate.order_updates">true</property>
+    <!-- Other configuration: -->
+    <property name="jdbc.use_scrollable_resultset">true</property>
+    <!--     //Whether to allow Hibernate to use JDBC a scrollable result set. The result set of paging. Is of great help when paging settings. -->
+    <property name="Connection.useUnicode">true</property>
+    <!-- //Whether to use Unicode code when connecting to the database -->
+    <!-- Configure the persistence mapping file -->
+    <property name="statement_cache.size">0</property>
+    <property name="hibernate.generate_statistics">false</property>
+    <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+    <property name="hibernate.connection.autocommit">false</property>
+    <mapping resource="hibernate/Mobile.hbm.xml" />
+    <mapping resource="hibernate/Demandessuivimobile.hbm.xml" />
+    <mapping resource="hibernate/Historiquesuivi.hbm.xml" />
+    <mapping resource="hibernate/Params.hbm.xml" />
+    <mapping resource="hibernate/Flotte.hbm.xml" />
+    <mapping resource="hibernate/Entite.hbm.xml" />
+    <mapping resource="hibernate/Domaine.hbm.xml" />
+    <mapping resource="hibernate/Logs.hbm.xml" />
+    <mapping resource="hibernate/Statsjour.hbm.xml" />
+    <mapping resource="hibernate/Statsmois.hbm.xml" />
+    <mapping resource="hibernate/Statsconsultations.hbm.xml" />
+    <mapping resource="hibernate/StatsconsultationsHit.hbm.xml" />
+    <!-- G2R3 -->
+    <mapping resource="hibernate/TypeDemande.hbm.xml" />
+    <mapping resource="hibernate/Client.hbm.xml" />
+    <mapping resource="hibernate/StatsLocSurDemandeDetails.hbm.xml" />
+    <mapping resource="hibernate/StatsLocSurDemandeJour.hbm.xml" />
+    <mapping resource="hibernate/LocSurDemande.hbm.xml" />
+
+    <mapping resource="hibernate/ResultatWs.hbm.xml" />
+    <mapping resource="hibernate/ResultatSolo.hbm.xml" />
+    <!-- G2R4 -->
+    <mapping resource="hibernate/AdressesCoordonneesBde.hbm.xml" />
+    <!-- G2R5 ALIS -->
+    <mapping resource="hibernate/LocHI2.hbm.xml" />
+    <mapping resource="hibernate/StatsLocHI2Details.hbm.xml" />
+    <mapping resource="hibernate/StatsLocHI2Jour.hbm.xml" />
+    <mapping resource="hibernate/ResultatGeoLocFifo.hbm.xml" />
+    <!-- G3R0 HORODATAGE -->
+    <mapping resource="hibernate/Horodatage.hbm.xml" />
+    <!-- G3R3 TEMPO REQUETE SOLO-->
+    <mapping resource="hibernate/TempoRequeteSolo.hbm.xml" />
+    <mapping resource="hibernate/ResultatSoloAggregated.hbm.xml" />
+    <!-- G3R3C1 Mapping Solo Reunion Caraibes-->
+    <mapping resource="hibernate/URLSolo.hbm.xml"/>
+    <mapping resource="hibernate/ParamsKeys.hbm.xml" />
+    <!-- G3R7C0 Noria Generique -->
+    <mapping resource="hibernate/SiteNoriaBde.hbm.xml" />
+    <mapping resource="hibernate/EqptNoria.hbm.xml" />
+    <!-- G3R10C0 -->
+    <mapping resource="hibernate/MsisdnEvent.hbm.xml" />
+    <mapping resource="hibernate/MsisdnEventFile.hbm.xml" />
+    <!-- G04R00C00 -->
+    <mapping resource="hibernate/Menu.hbm.xml" />
+    <mapping resource="hibernate/RestrictionMenu.hbm.xml" />
+    <mapping resource="hibernate/RestrictionPrestation.hbm.xml" />
+    <!-- G04R01C00 -->
+    <mapping resource="hibernate/LocSurDemandeHit.hbm.xml" />
+    <!-- G04R03C00 -->
+    <mapping resource="hibernate/StatsJobsResults.hbm.xml" />
+  </session-factory>
+</hibernate-configuration>

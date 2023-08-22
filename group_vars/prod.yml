@@ -1,2 +1,68 @@
 ansible_user: admin
 ansible_password: admin
+
+CONF.APP.User: zef
+CONF.APP.Group: ezf
+
+CONF.TOMCAT.PORT_SHUTDOWN: 9800
+CONF.TOMCAT.PORT_HTTP: 9500
+CONF.TOMCAT.PORT_HTTPS: NO
+CONF.TOMCAT.PORT_AJP: 9700
+CONF.TOMCAT.PORT_JMX: 9900
+CONF.TOMCAT.PORT_ADMIN: NO
+
+CONF.APACHE.PORT_STD: 8080
+CONF.APACHE.PORT_SSL: 443
+CONF.APACHE.TYPE: java
+CONF.APACHE.VG: zef
+CONF.APACHE.LvSize: 10076
+CONF.APACHE.Worker: n
+CONF.APACHE.Http: y
+CONF.APACHE.Https: y
+CONF.APACHE.ETH: eth1
+CONF.APACHE.Flag: y
+CONF.APACHE.Diff: diff
+CONF.APACHE.PageSpeed: n
+
+build_timestamp: ${buildVersion}
+
+bdd_ip: dezfzeffr
+bdd_username: zef
+bdd_password: zefezf
+bdd_port: 20300
+bdd_SID: zeffez
+
+url_ws_geotrack: "http://dzeftrack"
+ias_username: eezf
+ias_pwd: ezfze+zef/Q==
+mode_gassi: true
+
+ign_key: zefzef
+ign_referer: geotrazefzefcom.fr
+
+instance_num: 00
+
+log4j_lvl: WARN
+log4j_puc_lvl: INFO
+log4j_path: /zefnt/logs
+log4j_puc_path: /opt/zef/logs
+log4j_bddpurge_lvl: WARN
+
+mod_jk_JkMount: JkMouzef00
+mod_jk_JkMountBis: JkMozeforker00
+
+bdd_connection_driver_class: oracle.jdbc.OracleDriver
+bdd_session_factory_name: hibernate.SessionFactory
+bdd_url: "jdbc:zefzefDD"
+
+rep_app_etc: /opt/zefzefrrent/etc
+rep_app_data: /var/ezfzepp
+
+ssl_SSLEngine: on
+ssl_SSLCertificateFile: /etzefgtws1.crt
+ssl_SSLCertificateChainFile: /etczefs1.crt
+ssl_SSLCertificateKeyFile: /etc/pkzefws1.key
+ssl_SSLCACertificateFile: /etzefws1.crt
+ssl_SSLProtocol: all -SSLv2 -SSLv3
+ssl_SSLCipherSuite: "ECDHE-ECDSA-AzefzefSHA:ECDzef3-SHA:!aNULLzef:!aECDH:!RC4"
+ssl_SSLHonorCipherOrder: on

@@ -1,0 +1,73 @@
+
+#============================================================================
+# Configure Main Scheduler Properties  
+#============================================================================
+
+org.quartz.scheduler.instanceName= GeotrackBackoffice
+org.quartz.scheduler.instanceId={{ ENV.instanceId }}
+
+org.quartz.scheduler.skipUpdateCheck= true
+
+#============================================================================
+# Configure ThreadPool  
+#============================================================================
+
+org.quartz.threadPool.class= org.quartz.simpl.SimpleThreadPool
+org.quartz.threadPool.threadCount= 25
+org.quartz.threadPool.threadPriority= 5
+
+#============================================================================
+# Configure JobStore  
+#============================================================================
+
+org.quartz.jobStore.misfireThreshold=60000
+
+org.quartz.jobStore.class=org.quartz.impl.jdbcjobstore.JobStoreTX
+org.quartz.jobStore.driverDelegateClass=org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+org.quartz.jobStore.useProperties=false
+org.quartz.jobStore.dataSource=quartzDS
+org.quartz.jobStore.tablePrefix=QRTZ_
+org.quartz.jobStore.isClustered=true
+
+#============================================================================
+# Configure Datasources  
+#============================================================================
+
+org.quartz.dataSource.quartzDS.driver ={{ bdd_connection_driver_class }}
+org.quartz.dataSource.quartzDS.URL ={{ bdd_url }}
+org.quartz.dataSource.quartzDS.user ={{ bdd_username }}
+org.quartz.dataSource.quartzDS.password ={{ bdd_password }}
+org.quartz.dataSource.quartzDS.maxConnections = 5
+org.quartz.dataSource.quartzDS.validationQuery = select 1 from dual
+
+#============================================================================
+# Configure Datasources (A) ou (B)   
+#============================================================================
+# (A) configuration PooledDS simple
+# attention: cette configuration (A) ne permet pas de figer le nom JMX du PooledDatasource, cf GEOTRACK-382
+# org.quartz.dataSource.quartzDS.driver ={{ bdd_connection_driver_class }}
+# org.quartz.dataSource.quartzDS.URL ={{ bdd_url }}
+# org.quartz.dataSource.quartzDS.user ={{ bdd_username }}
+# org.quartz.dataSource.quartzDS.password ={{ bdd_password }}
+# org.quartz.dataSource.quartzDS.maxConnections = 5
+# org.quartz.dataSource.quartzDS.validationQuery = select 1 from dual
+
+# (C) configuration JNDI (Tomcat server.xml Shared Resource)
+org.quartz.dataSource.quartzDS.jndiURL=java:comp/env/jdbc/geotrackDB
+
+#===================================================
+# Configure the Job Initialization Plugin
+#===================================================
+
+org.quartz.plugin.jobInitializer.class = org.quartz.plugins.xml.XMLSchedulingDataProcessorPlugin
+org.quartz.plugin.jobInitializer.fileNames ={{ rep_app_etc }}/quartz.xml
+org.quartz.plugin.jobInitializer.failOnFileNotFound = true
+org.quartz.plugin.jobInitializer.scanInterval = 10
+org.quartz.plugin.jobInitializer.wrapInUserTransaction = false
+
+
+#===================================================
+# Configure the Job ShutdownHook Plugin
+#===================================================
+org.quartz.plugin.shutdownHook.class=org.quartz.plugins.management.ShutdownHookPlugin
+org.quartz.plugin.shutdownHook.cleanShutdown = true

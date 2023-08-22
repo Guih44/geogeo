@@ -1,0 +1,24 @@
+###############  PARAMETRAGE RECETTE SI (Intranet OL) ###############
+URL_WEBSERVICES_GEOTRACK={{ url_ws_geotrack }}
+
+###############   PARAMETRAGE IAS   ###############
+IAS_USERNAME={{ ias_username }}
+IAS_PWD={{ ias_pwd }}
+
+IGN_KEY={{ ign_key }}
+IGN_REFERER={{ ign_referer }}
+
+
+###############		DIVERS 	(A NE PAS MODIFIER)	###############
+APPLICATION_VERSION={{ ENV.IMP_GOROCO }}
+APPLICATION_BUILD={{ build_timestamp }}
+APPLICATION_CONTEXT=/portailOL
+APPLICATION_POINT_ENTREE=/login.do
+
+MAX_POINTS_AFFICHAGE=50
+
+MODE_GASSI={{ mode_gassi }}
+
+############### Configuration des cookies de session ###############
+server.session.cookie.http-only=true
+server.session.cookie.secure=true
