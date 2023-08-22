@@ -23,15 +23,16 @@
       pip: name=docker-py
 
   tasks:
+    - name: Create Image Folder
+      ansible.builtin.file:
+        path: /home/admin/geogeo/G05R00C00
+        recurse: yes
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+
     - name: Copy website file template
       template:
         src: index.html.j2
-        dest: /home/admin/index.html
-    - name: Create Apache Conteneur
-      docker_container:
-        name: webapp
-        image: httpd
-        ports:
-          - "80:80"
-        volumes:
-          - /home/admin/index.html:/usr/local/apache2/htdocs/index.html
+        dest: /home/admin/geogeo/G05R00C00/index.html
