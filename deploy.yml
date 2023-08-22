@@ -5,6 +5,8 @@
   become: true
 
   vars:
+    source_directory: "{{ playbook_dir }}/templates"
+    destination_directory: "/home/admin/geogeo/G05R00C00"
 
   pre_tasks:
     - name: install Epel repo
@@ -32,7 +34,67 @@
         group: root
         mode: 0755
 
-    - name: Copy website file template
-      template:
-        src: index.html.j2
-        dest: /home/admin/geogeo/G05R00C00/index.html
+    - name: CreateGorocoEtcDirectory
+      ansible.builtin.file:
+        path: "/home/admin/geogeo/G05R00C00/etc"
+        owner: root
+        group: root
+        state: directory
+        mode: "0755"
+
+    - name: CreateGorocoEtcDirectory
+      ansible.builtin.file:
+        path: "/home/admin/geogeo/G05R00C00/APA/conf.d"
+        owner: root
+        group: root
+        state: directory
+        mode: "0755"
+
+    - name: CreateGorocoEtcDirectory
+      ansible.builtin.file:
+        path: "/home/admin/geogeo/G05R00C00/TOM/conf"
+        owner: root
+        group: root
+        state: directory
+        mode: "0755"
+
+    - name: Run pwd command
+      ansible.builtin.shell: pwd
+      register: pwd_output
+
+    - name: Display pwd output for debugging
+      debug:
+        var: pwd_output.stdout_lines
+
+    - name: Run ls command
+      ansible.builtin.shell: ls
+      register: ls_output
+
+    - name: Display ls output for debugging
+      debug:
+        var: ls_output.stdout_lines
+
+    - name: Get list of files in source directory
+      ansible.builtin.find:
+        paths: "{{ source_directory }}"
+        recurse: yes
+        file_type: file
+      delegate_to: localhost
+      register: template_files
+
+    - name: Display template_files variable for debugging
+      debug:
+        var: template_files
+
+    - name: Template each file in the source directory
+      ansible.builtin.template:
+        src: "{{ item.path }}"
+        dest: "{{ destination_directory }}/{{ item.path | regex_replace('.j2$', '') | replace(source_directory + '/', '') }}"
+        mode: "0755"
+      loop: "{{ template_files.files }}"
+
+    #- name: Templating File's Project
+    # ansible.builtin.template:
+    #src: index.html.j2
+    #dest: /home/admin/geogeo/G05R00C00/index.html
+    #mode: "0755"
