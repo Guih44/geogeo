@@ -11,3 +11,5 @@ git push origin master
 git pull --rebase
 
 ansible-playbook -i hosts.yml deploy.yml
+
+git clone https://github.com/Guih44/geogeo.git

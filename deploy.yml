@@ -46,6 +46,15 @@
       debug:
         var: previous_version
 
+    - name: Create Image Folder old
+      ansible.builtin.file:
+        path: /home/admin/geogeo/G04R00C00
+        recurse: yes
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+
     - name: Create Image Folder
       ansible.builtin.file:
         path: /home/admin/geogeo/G05R00C00
@@ -113,6 +122,29 @@
         dest: "{{ destination_directory }}/{{ item.path | regex_replace('.j2$', '') | replace(source_directory + '/', '') }}"
         mode: "0755"
       loop: "{{ template_files.files }}"
+
+    - name: RemoveOldCurrent
+      ansible.builtin.file:
+        path: "/home/admin/geogeo/current.old"
+        state: absent
+
+    - name: CheckCurrent
+      stat:
+        path: "/home/admin/geogeo/current"
+      register: Current
+
+    - name: SaveCurrent
+      command: mv "/home/admin/geogeo/current" "/home/admin/geogeo/current.old"
+      when: Current.stat.exists
+
+    - name: SetCurrent
+      ansible.builtin.file:
+        src: "/home/admin/geogeo/{{ app_goroco }}"
+        dest: "/home/admin/geogeo/current"
+        owner: "{{ app_user }}"
+        group: "{{ app_group }}"
+        follow: no
+        state: link
 
     #- name: Templating File's Project
     # ansible.builtin.template:
