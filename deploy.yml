@@ -124,15 +124,19 @@
         mode: "0755"
       loop: "{{ template_files.files }}"
 
-    - name: RemoveOldCurrent
-      ansible.builtin.file:
-        path: "/home/admin/geogeo/current.old"
-        state: absent
-
     - name: CheckCurrent
       stat:
         path: "/home/admin/geogeo/current"
       register: Current
+
+    - name: CheckCurrentOld
+      stat:
+        path: "/home/admin/geogeo/current.old"
+      register: CurrentOld
+
+    - name: RenameCurrentOld
+      command: mv "/home/admin/geogeo/current.old" "/home/admin/geogeo/{{ app_goroco }}"
+      when: CurrentOld.stat.exists and CurrentOld.stat.islnk and not Current.stat.exists
 
     - name: SaveCurrent
       command: mv "/home/admin/geogeo/current" "/home/admin/geogeo/current.old"
