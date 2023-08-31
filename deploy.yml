@@ -27,8 +27,14 @@
       pip: name=docker-py
 
   tasks:
+    - name: Copy Script to Host
+      copy:
+        src: scripts/find_previous_version.sh
+        dest: /home/admin/find_previous_version.sh
+        mode: "0755" # Set the appropriate permissions
+
     - name: Execute Shell Script
-      shell: files/find_previous_version.sh {{ target_version }} {{ target_path }}
+      shell: /home/admin/find_previous_version.sh {{ target_version }} {{ target_path }}
       register: previous_version_result
       ignore_errors: yes # Ignore errors if the script returns a non-zero exit code
 
