@@ -47,23 +47,26 @@
       debug:
         var: previous_version
 
+        ########
+
     - name: CheckCurrent
       stat:
         path: "/home/admin/geogeo/current"
       register: Current
 
-    - name: CheckCurrentOld
-      stat:
+    - name: RemoveOldCurrent
+      ansible.builtin.file:
         path: "/home/admin/geogeo/current.old"
-      register: CurrentOld
+        state: absent
+      when: Current.stat.exists and app_goroco_test != (Current.stat.lnk_source | basename)
+      vars:
+        app_goroco_test: "{{ app_goroco | default('') }}"
 
-    - name: RenameCurrentOld
-      command: mv "/home/admin/geogeo/current.old" "/home/admin/geogeo/{{ app_goroco }}"
-      when: CurrentOld.stat.exists and CurrentOld.stat.islnk and not Current.stat.exists
-
-    - name: SaveCurrent
+    - name: SaveNewCurrent.Old
       command: mv "/home/admin/geogeo/current" "/home/admin/geogeo/current.old"
-      when: Current.stat.exists
+      when: Current.stat.exists and app_goroco_test != (Current.stat.lnk_source | basename)
+      vars:
+        app_goroco_test: "{{ app_goroco | default('') }}"
 
     - name: SetCurrent
       ansible.builtin.file:
