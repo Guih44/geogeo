@@ -9,6 +9,7 @@
     destination_directory: "/home/admin/geogeo/G05R00C00"
     target_version: H05S01T04
     target_path: /home/admin/images
+    app_goroco: G05R00C00
 
   pre_tasks:
     - name: install Epel repo
