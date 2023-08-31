@@ -3,7 +3,7 @@
 # Configure Main Scheduler Properties  
 #============================================================================
 
-org.quartz.scheduler.instanceName= GeotrackBackoffice
+org.quartz.scheduler.instanceName= geogeoBackoffice
 org.quartz.scheduler.instanceId={{ ENV.instanceId }}
 
 org.quartz.scheduler.skipUpdateCheck= true
@@ -44,7 +44,7 @@ org.quartz.dataSource.quartzDS.validationQuery = select 1 from dual
 # Configure Datasources (A) ou (B)   
 #============================================================================
 # (A) configuration PooledDS simple
-# attention: cette configuration (A) ne permet pas de figer le nom JMX du PooledDatasource, cf GEOTRACK-382
+# attention: cette configuration (A) ne permet pas de figer le nom JMX du PooledDatasource, cf geogeo-382
 # org.quartz.dataSource.quartzDS.driver ={{ bdd_connection_driver_class }}
 # org.quartz.dataSource.quartzDS.URL ={{ bdd_url }}
 # org.quartz.dataSource.quartzDS.user ={{ bdd_username }}
@@ -53,7 +53,7 @@ org.quartz.dataSource.quartzDS.validationQuery = select 1 from dual
 # org.quartz.dataSource.quartzDS.validationQuery = select 1 from dual
 
 # (C) configuration JNDI (Tomcat server.xml Shared Resource)
-org.quartz.dataSource.quartzDS.jndiURL=java:comp/env/jdbc/geotrackDB
+org.quartz.dataSource.quartzDS.jndiURL=java:comp/env/jdbc/geogeoDB
 
 #===================================================
 # Configure the Job Initialization Plugin

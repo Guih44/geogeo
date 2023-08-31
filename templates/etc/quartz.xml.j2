@@ -7,21 +7,21 @@
   		doc: http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/crontrigger.html
     -->
   <!-- *************************************************** -->
-  <!-- Integration des fichiers d'adresses coordonnees : NORIA -->
+  <!-- Integration des fichiers d'adresses coordonnees : geogeoio -->
   <!-- *************************************************** -->
   <schedule>
     <job>
-      <name>noria-job</name>
-      <group>NORIA_GROUP</group>
-      <description>NORIA for Geotrack</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.IntegrationAdressesCoordonneesJob</job-class>
+      <name>geogeoio-job</name>
+      <group>geogeoio_GROUP</group>
+      <description>geogeoio for geogeo</description>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.IntegrationAdressesCoordonneesJob</job-class>
     </job>
     <trigger>
       <cron>
-        <name>noria-trigger</name>
-        <group>NORIA_TRIGGER_GROUP</group>
-        <job-name>noria-job</job-name>
-        <job-group>NORIA_GROUP</job-group>
+        <name>geogeoio-trigger</name>
+        <group>geogeoio_TRIGGER_GROUP</group>
+        <job-name>geogeoio-job</job-name>
+        <job-group>geogeoio_GROUP</job-group>
         <!-- tous les jours a 8h ... -->
         <cron-expression>0 0 8 ? * *</cron-expression>
       </cron>
@@ -35,8 +35,8 @@
     <job>
       <name>si-loc-job</name>
       <group>SI_GROUP</group>
-      <description>SI Geotrack</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.SuiviImmediateLocJob</job-class>
+      <description>SI geogeo</description>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.SuiviImmediateLocJob</job-class>
     </job>
     <trigger>
       <cron>
@@ -57,7 +57,7 @@
       <name>stats-consults-hitaggregate-job</name>
       <group>STATS_CONSULTS_GROUP</group>
       <description>Aggregation des statistiques consultations hit</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.StatsConsultationsJob</job-class>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.StatsConsultationsJob</job-class>
     </job>
     <trigger>
       <cron>
@@ -75,7 +75,7 @@
       <name>stats-calcul-job</name>
       <group>STATS_GROUP</group>
       <description>Calcul des statistiques journalieres et mensuelles</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.StatistiquesCalculGenFichierJob</job-class>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.StatistiquesCalculGenFichierJob</job-class>
     </job>
     <trigger>
       <cron>
@@ -96,11 +96,11 @@
       <name>purge-bdd-job</name>
       <group>PURGE_BDD_GROUP</group>
       <description>Purge des donnees de base de donnees</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.PurgeBddLogHistoJob</job-class>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.PurgeBddLogHistoJob</job-class>
       <job-data-map>
         <entry>
           <key>DIR_PATH</key>
-          <value>{{ rep_app_data }}/alis</value>
+          <value>{{ rep_app_data }}/geogeois</value>
         </entry>
       </job-data-map>
     </job>
@@ -123,7 +123,7 @@
       <name>purge-bdd-hit-ms20-job</name>
       <group>PURGE_BDD_HIT_MS20_GROUP</group>
       <description>Purge des donnees de hit ms20 de base de donnees</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.PurgeBddLocSurDemandeHitJob</job-class>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.PurgeBddLocSurDemandeHitJob</job-class>
     </job>
     <trigger>
       <cron>
@@ -144,7 +144,7 @@
       <name>stats-es-activ-demand-job</name>
       <group>STATS_ES_ACTIV_DEMAND_GROUP</group>
       <description>sauvegarde du nombre de demande d es activ</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.StatsESActivDemandJob</job-class>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.StatsESActivDemandJob</job-class>
     </job>
     <trigger>
       <cron>
@@ -158,82 +158,82 @@
     </trigger>
   </schedule>
   <!-- **** -->
-  <!-- ALIS -->
+  <!-- geogeois -->
   <!-- **** -->
   <schedule>
-    <!-- ALIS TrackHI2  -->
+    <!-- geogeois TrackHI2  -->
     <job>
-      <name>alis-trackhi2-job</name>
-      <group>ALIS_GROUP</group>
-      <description>ALIS TrackHI2: abonnements et desabonnements SDK SOLO</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.AlisTrackHI2Job</job-class>
+      <name>geogeois-trackhi2-job</name>
+      <group>geogeois_GROUP</group>
+      <description>geogeois TrackHI2: abonnements et desabonnements SDK geogeolo</description>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.geogeoisTrackHI2Job</job-class>
     </job>
     <trigger>
       <cron>
-        <name>alis-trackhi2-trigger</name>
-        <group>ALIS_TRIGGER_GROUP</group>
-        <job-name>alis-trackhi2-job</job-name>
-        <job-group>ALIS_GROUP</job-group>
+        <name>geogeois-trackhi2-trigger</name>
+        <group>geogeois_TRIGGER_GROUP</group>
+        <job-name>geogeois-trackhi2-job</job-name>
+        <job-group>geogeois_GROUP</job-group>
         <!-- Every min -->
         <cron-expression>0 0/1 * * * ?</cron-expression>
       </cron>
     </trigger>
   </schedule>
   <schedule>
-    <!-- ALIS HI2Loc-->
+    <!-- geogeois HI2Loc-->
     <job>
-      <name>alis-hi2-loc-job</name>
-      <group>ALIS_GROUP</group>
-      <description>ALIS HI2LocJob: traitement des localisations actives HI2</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.AlisHI2LocJob</job-class>
+      <name>geogeois-hi2-loc-job</name>
+      <group>geogeois_GROUP</group>
+      <description>geogeois HI2LocJob: traitement des locgeogeoisations actives HI2</description>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.geogeoisHI2LocJob</job-class>
     </job>
     <trigger>
       <cron>
-        <name>alis-hi2-loc-trigger</name>
-        <group>ALIS_TRIGGER_GROUP</group>
-        <job-name>alis-hi2-loc-job</job-name>
-        <job-group>ALIS_GROUP</job-group>
+        <name>geogeois-hi2-loc-trigger</name>
+        <group>geogeois_TRIGGER_GROUP</group>
+        <job-name>geogeois-hi2-loc-job</job-name>
+        <job-group>geogeois_GROUP</job-group>
         <!-- Every 20 s -->
         <cron-expression>15/30 * * * * ?</cron-expression>
       </cron>
     </trigger>
   </schedule>
   <schedule>
-    <!-- ALIS AlisHI2ResendFileJob -->
+    <!-- geogeois geogeoisHI2ResendFileJob -->
     <job>
-      <name>alis-hi2-resend-file-job</name>
-      <group>ALIS_GROUP</group>
-      <description>ALIS HI2ResendFileJob : renvoi des fichiers hi2 cote diode et cote geotrack</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.AlisHI2ResendFileJob</job-class>
+      <name>geogeois-hi2-resend-file-job</name>
+      <group>geogeois_GROUP</group>
+      <description>geogeois HI2ResendFileJob : renvoi des fichiers hi2 cote diode et cote geogeo</description>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.geogeoisHI2ResendFileJob</job-class>
       <job-data-map>
         <entry>
           <key>DIR_PATH</key>
-          <value>{{ rep_app_data }}/alis</value>
+          <value>{{ rep_app_data }}/geogeois</value>
         </entry>
       </job-data-map>
     </job>
     <trigger>
       <cron>
-        <name>alis-hi2-resend-file-trigger</name>
-        <group>ALIS_TRIGGER_GROUP</group>
-        <job-name>alis-hi2-resend-file-job</job-name>
-        <job-group>ALIS_GROUP</job-group>
+        <name>geogeois-hi2-resend-file-trigger</name>
+        <group>geogeois_TRIGGER_GROUP</group>
+        <job-name>geogeois-hi2-resend-file-job</job-name>
+        <job-group>geogeois_GROUP</job-group>
         <!-- Evry 15 min -->
         <cron-expression>0 0/15 * * * ?</cron-expression>
       </cron>
     </trigger>
   </schedule>
   <schedule>
-    <!-- ALIS HI2FileGenerate -->
+    <!-- geogeois HI2FileGenerate -->
     <job>
-      <name>alis-hi2-filegenerate-job</name>
-      <group>ALIS_GROUP</group>
-      <description>ALIS HI2FileGenerate: generation des fichiers ALIS pour demandes HI2</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.AlisHI2FileGenerate</job-class>
+      <name>geogeois-hi2-filegenerate-job</name>
+      <group>geogeois_GROUP</group>
+      <description>geogeois HI2FileGenerate: generation des fichiers geogeois pour demandes HI2</description>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.geogeoisHI2FileGenerate</job-class>
       <job-data-map>
         <entry>
           <key>DIR_PATH</key>
-          <value>{{ rep_app_data }}/alis</value>
+          <value>{{ rep_app_data }}/geogeois</value>
         </entry>
         <entry>
           <key>FILENAME_FORMAT</key>
@@ -243,26 +243,26 @@
     </job>
     <trigger>
       <cron>
-        <name>alis-hi2-filegenerate-trigger</name>
-        <group>ALIS_TRIGGER_GROUP</group>
-        <job-name>alis-hi2-filegenerate-job</job-name>
-        <job-group>ALIS_GROUP</job-group>
+        <name>geogeois-hi2-filegenerate-trigger</name>
+        <group>geogeois_TRIGGER_GROUP</group>
+        <job-name>geogeois-hi2-filegenerate-job</job-name>
+        <job-group>geogeois_GROUP</job-group>
         <!-- Evry min -->
         <cron-expression>0 0/1 * * * ?</cron-expression>
       </cron>
     </trigger>
   </schedule>
   <schedule>
-    <!-- ALIS THI2FileGenerate -->
+    <!-- geogeois THI2FileGenerate -->
     <job>
-      <name>alis-thi2-filegenerate-job</name>
-      <group>ALIS_GROUP</group>
-      <description>ALIS THI2FileGenerate: generation des fichiers ALIS pour demandes Tracking HI2</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.AlisTHI2FileGenerate</job-class>
+      <name>geogeois-thi2-filegenerate-job</name>
+      <group>geogeois_GROUP</group>
+      <description>geogeois THI2FileGenerate: generation des fichiers geogeois pour demandes Tracking HI2</description>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.geogeoisTHI2FileGenerate</job-class>
       <job-data-map>
         <entry>
           <key>DIR_PATH</key>
-          <value>{{ rep_app_data }}/alis</value>
+          <value>{{ rep_app_data }}/geogeois</value>
         </entry>
         <entry>
           <key>FILENAME_FORMAT</key>
@@ -272,10 +272,10 @@
     </job>
     <trigger>
       <cron>
-        <name>alis-thi2-filegenerate-trigger</name>
-        <group>ALIS_TRIGGER_GROUP</group>
-        <job-name>alis-thi2-filegenerate-job</job-name>
-        <job-group>ALIS_GROUP</job-group>
+        <name>geogeois-thi2-filegenerate-trigger</name>
+        <group>geogeois_TRIGGER_GROUP</group>
+        <job-name>geogeois-thi2-filegenerate-job</job-name>
+        <job-group>geogeois_GROUP</job-group>
         <!-- Every min -->
         <cron-expression>0 0/1 * * * ?</cron-expression>
       </cron>
@@ -287,7 +287,7 @@
       <name>horodatage-filegenerate-job</name>
       <group>HORODATAGE_GROUP</group>
       <description>HORODATAGE FileGenerate: generation des fichiers d'horodatage</description>
-      <job-class>com.orange.geotrack.backoffice.jobs.HorodatageFileGenerate</job-class>
+      <job-class>com.geogeoange.geogeo.backoffice.jobs.HorodatageFileGenerate</job-class>
       <job-data-map>
         <entry>
           <key>DIR_PATH</key>

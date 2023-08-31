@@ -11,7 +11,7 @@
 	  connexion via jndi (cf. server.xml)
     -->
     <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
-    <property name="hibernate.connection.datasource">java:comp/env/jdbc/geotrackDB</property>
+    <property name="hibernate.connection.datasource">java:comp/env/jdbc/geogeoDB</property>
     <property name="hibernate.connection.username">{{ bdd_username }}</property>
     <property name="hibernate.connection.password">{{ bdd_password }}</property>
     <property name="preferredTestQuery">select 1 from dual</property>
@@ -53,25 +53,25 @@
     <mapping resource="hibernate/LocSurDemande.hbm.xml" />
 
     <mapping resource="hibernate/ResultatWs.hbm.xml" />
-    <mapping resource="hibernate/ResultatSolo.hbm.xml" />
+    <mapping resource="hibernate/Resultatgeogeolo.hbm.xml" />
     <!-- G2R4 -->
     <mapping resource="hibernate/AdressesCoordonneesBde.hbm.xml" />
-    <!-- G2R5 ALIS -->
+    <!-- G2R5 geogeois -->
     <mapping resource="hibernate/LocHI2.hbm.xml" />
     <mapping resource="hibernate/StatsLocHI2Details.hbm.xml" />
     <mapping resource="hibernate/StatsLocHI2Jour.hbm.xml" />
     <mapping resource="hibernate/ResultatGeoLocFifo.hbm.xml" />
     <!-- G3R0 HORODATAGE -->
     <mapping resource="hibernate/Horodatage.hbm.xml" />
-    <!-- G3R3 TEMPO REQUETE SOLO-->
-    <mapping resource="hibernate/TempoRequeteSolo.hbm.xml" />
-    <mapping resource="hibernate/ResultatSoloAggregated.hbm.xml" />
-    <!-- G3R3C1 Mapping Solo Reunion Caraibes-->
-    <mapping resource="hibernate/URLSolo.hbm.xml"/>
+    <!-- G3R3 TEMPO REQUETE geogeolo-->
+    <mapping resource="hibernate/TempoRequetegeogeolo.hbm.xml" />
+    <mapping resource="hibernate/ResultatgeogeoloAggregated.hbm.xml" />
+    <!-- G3R3C1 Mapping geogeolo Reunion Caraibes-->
+    <mapping resource="hibernate/URLgeogeolo.hbm.xml"/>
     <mapping resource="hibernate/ParamsKeys.hbm.xml" />
-    <!-- G3R7C0 Noria Generique -->
-    <mapping resource="hibernate/SiteNoriaBde.hbm.xml" />
-    <mapping resource="hibernate/EqptNoria.hbm.xml" />
+    <!-- G3R7C0 geogeoio Generique -->
+    <mapping resource="hibernate/SitegeogeoioBde.hbm.xml" />
+    <mapping resource="hibernate/Eqptgeogeoio.hbm.xml" />
     <!-- G3R10C0 -->
     <mapping resource="hibernate/MsisdnEvent.hbm.xml" />
     <mapping resource="hibernate/MsisdnEventFile.hbm.xml" />

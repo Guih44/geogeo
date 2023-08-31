@@ -11,7 +11,7 @@
   </appender>
 
   <appender name="dailyFile" class="org.apache.log4j.DailyRollingFileAppender">
-    <param name="File" value="{{ log4j_path }}/geotrack-ws.log" />
+    <param name="File" value="{{ log4j_path }}/geogeo-ws.log" />
     <param name="DatePattern" value="'.'yyyy-MM-dd" />
     <param name="encoding" value="Cp1252"/>
     <layout class="org.apache.log4j.PatternLayout">
@@ -19,8 +19,8 @@
     </layout>
   </appender>
 
-  <appender name="ALIS" class="org.apache.log4j.DailyRollingFileAppender">
-      <param name="File" value="{{ log4j_path }}/geotrack-alis.log" />
+  <appender name="geogeois" class="org.apache.log4j.DailyRollingFileAppender">
+      <param name="File" value="{{ log4j_path }}/geogeo-geogeois.log" />
       <param name="DatePattern" value="'.'yyyy-MM-dd" />
       <param name="encoding" value="Cp1252"/>
       <layout class="org.apache.log4j.PatternLayout">
@@ -28,9 +28,9 @@
       </layout>
   </appender>
   
-  <!-- PUC log standard: cf. GEOTRACK-209 / Spécifications BCO_log applicatifs S0F1.pdf -->
+  <!-- PUC log standard: cf. geogeo-209 / Spécifications BCO_log applicatifs S0F1.pdf -->
   <appender name="dailyPucFile" class="org.apache.log4j.DailyRollingFileAppender">
-    <param name="File" value="{{ log4j_puc_path }}/geotrack-puc-ws.log" />
+    <param name="File" value="{{ log4j_puc_path }}/geogeo-puc-ws.log" />
     <param name="DatePattern" value="'.'yyyy-MM-dd" />
     <param name="encoding" value="Cp1252"/>
     <layout class="org.apache.log4j.PatternLayout">
@@ -40,14 +40,14 @@
   
   <logger name="org.hibernate"><level value="WARN" /></logger>
 
-  <logger name="com.orange.puc" additivity="false">
+  <logger name="com.geogeoange.puc" additivity="false">
      <level value="{{ log4j_puc_lvl }}" />
    	 <appender-ref ref="dailyPucFile" />
   </logger>
 
-  <logger name="LoggerAlis">
+  <logger name="Loggergeogeois">
     <level value="INFO" />
-    <appender-ref ref="ALIS"/>
+    <appender-ref ref="geogeois"/>
   </logger>
     
 

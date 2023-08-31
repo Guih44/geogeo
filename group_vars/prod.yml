@@ -38,7 +38,7 @@ bdd_password: zefezf
 bdd_port: 20300
 bdd_SID: zeffez
 
-url_ws_geotrack: "http://dzeftrack"
+url_ws_geogeo: "http://dzeftrack"
 ias_username: eezf
 ias_pwd: ezfze+zef/Q==
 mode_gassi: true
@@ -70,5 +70,5 @@ ssl_SSLCertificateChainFile: /etczefs1.crt
 ssl_SSLCertificateKeyFile: /etc/pkzefws1.key
 ssl_SSLCACertificateFile: /etzefws1.crt
 ssl_SSLProtocol: all -SSLv2 -SSLv3
-ssl_SSLCipherSuite: "ECDHE-ECDSA-AzefzefSHA:ECDzef3-SHA:!aNULLzef:!aECDH:!RC4"
+ssl_SSLCipherSuite: "ECDHzefzef:!RC4"
 ssl_SSLHonorCipherOrder: on

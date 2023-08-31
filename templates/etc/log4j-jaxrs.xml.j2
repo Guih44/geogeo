@@ -12,7 +12,7 @@
 
   <appender name="jaxrsFile" class="org.apache.log4j.DailyRollingFileAppender">
     <param name="DatePattern" value="'.'yyyy-MM-dd" />
-    <param name="File" value="{{ log4j_path }}/geotrack-jaxrs.log" />
+    <param name="File" value="{{ log4j_path }}/geogeo-jaxrs.log" />
     <param name="append" value="false" />
     <param name="Threshold" value="ALL" />
     <param name="MaxFileSize" value="200MB" />  
@@ -24,9 +24,9 @@
   </appender>
 
 
-  <!-- PUC log standard: cf. GEOTRACK-209 / Spécifications BCO_log applicatifs S0F1.pdf -->
+  <!-- PUC log standard: cf. geogeo-209 / Spécifications BCO_log applicatifs S0F1.pdf -->
   <appender name="dailyPucFile" class="org.apache.log4j.DailyRollingFileAppender">
-    <param name="File" value="{{ log4j_puc_path }}/geotrack-puc-jaxrs.log" />
+    <param name="File" value="{{ log4j_puc_path }}/geogeo-puc-jaxrs.log" />
     <param name="DatePattern" value="'.'yyyy-MM-dd" />
     <param name="encoding" value="Cp1252"/>
     <layout class="org.apache.log4j.PatternLayout">
@@ -36,7 +36,7 @@
 
   <logger name="org.hibernate"><level value="WARN" /></logger>
 
-  <logger name="com.orange.puc" additivity="false">
+  <logger name="com.geogeoange.puc" additivity="false">
      <level value="{{ log4j_puc_lvl }}" />
    	 <appender-ref ref="dailyPucFile" />
   </logger>
