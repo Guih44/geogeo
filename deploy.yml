@@ -142,8 +142,8 @@
       ansible.builtin.file:
         src: "/home/admin/geogeo/{{ app_goroco }}"
         dest: "/home/admin/geogeo/current"
-        owner: "{{ app_user }}"
-        group: "{{ app_group }}"
+        owner: root
+        group: root
         follow: no
         state: link
 
