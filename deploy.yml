@@ -28,7 +28,7 @@
 
   tasks:
     - name: Execute Shell Script
-      shell: ./files/find_previous_version.sh {{ target_version }} {{ target_path }}
+      shell: files/find_previous_version.sh {{ target_version }} {{ target_path }}
       register: previous_version_result
       ignore_errors: yes # Ignore errors if the script returns a non-zero exit code
 
