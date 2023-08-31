@@ -11,43 +11,111 @@
     target_path: /home/admin/images
     app_goroco: G05R00C00
 
-  pre_tasks:
-    - name: install Epel repo
-      package:
-        name: epel-release
-        state: present
-      when: ansible_distribution == "CentOS"
-    - name: download pip script
-      get_url:
-        url: https://bootstrap.pypa.io/pip/2.7/get-pip.py
-        dest: /tmp/get-pip.py
-    - name: install python-pip
-      command: python2.7 /tmp/get-pip.py
-      changed_when: false
-    - name: Install docker python
-      pip: name=docker-py
+  #pre_tasks:
+  #- name: install Epel repo
+  # package:
+  #name: epel-release
+  #state: present
+  #when: ansible_distribution == "CentOS"
+  #- name: download pip script
+  #get_url:
+  #url: https://bootstrap.pypa.io/pip/2.7/get-pip.py
+  #dest: /tmp/get-pip.py
+  #- name: install python-pip
+  #command: python2.7 /tmp/get-pip.py
+  #changed_when: false
+  #- name: Install docker python
+  #pip: name=docker-py
 
   tasks:
-    - name: Copy Script to Host
-      copy:
-        src: files/find_previous_version.sh
-        dest: /home/admin/find_previous_version.sh
-        mode: "0755" # Set the appropriate permissions
+    #- name: Copy Script to Host
+    # copy:
+    #  src: files/find_previous_version.sh
+    # dest: /home/admin/find_previous_version.sh
+    #mode: "0755" # Set the appropriate permissions
 
-    - name: Execute Shell Script
-      shell: /home/admin/find_previous_version.sh {{ target_version }} {{ target_path }}
-      register: previous_version_result
-      ignore_errors: yes # Ignore errors if the script returns a non-zero exit code
+    #- name: Execute Shell Script
+    # shell: /home/admin/find_previous_version.sh {{ target_version }} {{ target_path }}
+    #register: previous_version_result
+    #ignore_errors: yes # Ignore errors if the script returns a non-zero exit code
 
-    - name: Set Previous Version Variable
-      set_fact:
-        previous_version: "{{ previous_version_result.stdout | default(omit) }}"
+    #- name: Set Previous Version Variable
+    # set_fact:
+    #  previous_version: "{{ previous_version_result.stdout | default(omit) }}"
 
-    - name: Display Previous Version
-      debug:
-        var: previous_version
+    #- name: Display Previous Version
+    # debug:
+    #  var: previous_version
 
-        ########
+    - name: Create Image Folder
+      ansible.builtin.file:
+        path: /home/admin/geogeo/G05R00C00
+        recurse: yes
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: CreateGorocoEtcDirectory
+      ansible.builtin.file:
+        path: "/home/admin/geogeo/G05R00C00/etc"
+        owner: root
+        group: root
+        state: directory
+        mode: "0755"
+
+    - name: CreateGorocoEtcDirectory
+      ansible.builtin.file:
+        path: "/home/admin/geogeo/G05R00C00/APA/conf.d"
+        owner: root
+        group: root
+        state: directory
+        mode: "0755"
+
+    - name: CreateGorocoEtcDirectory
+      ansible.builtin.file:
+        path: "/home/admin/geogeo/G05R00C00/TOM/conf"
+        owner: root
+        group: root
+        state: directory
+        mode: "0755"
+
+    #    - name: Run pwd command
+    #     ansible.builtin.shell: pwd
+    #register: pwd_output
+
+    #- name: Display pwd output for debugging
+    #debug:
+    # var: pwd_output.stdout_lines
+
+    #- name: Run ls command
+    # ansible.builtin.shell: ls
+    #      register: ls_output
+
+    #   - name: Display ls output for debugging
+    #    debug:
+    #     var: ls_output.stdout_lines
+
+    #- name: Get list of files in source directory
+    # ansible.builtin.find:
+    #  paths: "{{ source_directory }}"
+    # recurse: yes
+    #file_type: file
+    #delegate_to: localhost
+    #register: template_files
+
+    #- name: Display template_files variable for debugging
+    # debug:
+    #  var: template_files
+
+    #- name: Template each file in the source directory
+    # ansible.builtin.template:
+    #  src: "{{ item.path }}"
+    # dest: "{{ destination_directory }}/{{ item.path | regex_replace('.j2$', '') | replace(source_directory + '/', '') }}"
+    #mode: "0755"
+    #loop: "{{ template_files.files }}"
+
+    ########
 
     - name: CheckCurrent
       stat:
