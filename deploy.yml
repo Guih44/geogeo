@@ -29,7 +29,7 @@
   tasks:
     - name: Copy Script to Host
       copy:
-        src: scripts/find_previous_version.sh
+        src: files/find_previous_version.sh
         dest: /home/admin/find_previous_version.sh
         mode: "0755" # Set the appropriate permissions
 
