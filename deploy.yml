@@ -7,7 +7,6 @@
   vars:
     source_directory: "{{ playbook_dir }}/templates"
     destination_directory: "/home/admin/geogeo/G05R00C00"
-    target_version: H05S01T04
     target_path: /home/admin/geogeo
     app_goroco: G05R00C00
 
@@ -35,7 +34,7 @@
         mode: "0755" # Set the appropriate permissions
 
     - name: Execute Shell Script
-      shell: /home/admin/find_previous_version.sh {{ target_version }} {{ target_path }}
+      shell: /home/admin/find_previous_version.sh {{ app_goroco }} {{ target_path }}
       register: previous_version_result
       ignore_errors: yes # Ignore errors if the script returns a non-zero exit code
 
