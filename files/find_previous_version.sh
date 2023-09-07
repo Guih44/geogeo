@@ -10,7 +10,7 @@ path=$2
 
 previous_version=""
 
-for version in $(ls -d ${path}/H*S*T* | sort -r); do
+for version in $(ls -d ${path}/G*R*C* | sort -r); do
     if [ "$(basename ${version})" \< "${target_version}" ]; then
         previous_version=$(basename ${version})
         break
@@ -18,7 +18,7 @@ for version in $(ls -d ${path}/H*S*T* | sort -r); do
 done
 
 if [ -n "${previous_version}" ]; then
-    echo "Closest previous version: ${previous_version}"
+    echo "${previous_version}"
 else
-    echo "No previous version found."
+    echo "NOPREVIOUSVERSION"
 fi

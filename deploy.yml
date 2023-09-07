@@ -33,19 +33,6 @@
         dest: /home/admin/find_previous_version.sh
         mode: "0755" # Set the appropriate permissions
 
-    - name: Execute Shell Script
-      shell: /home/admin/find_previous_version.sh {{ app_goroco }} {{ target_path }}
-      register: previous_version_result
-      ignore_errors: yes # Ignore errors if the script returns a non-zero exit code
-
-    - name: Set Previous Version Variable
-      set_fact:
-        previous_version: "{{ previous_version_result.stdout | default(omit) }}"
-
-    - name: Display Previous Version
-      debug:
-        var: previous_version
-
     - name: Create Image Folder
       ansible.builtin.file:
         path: /home/admin/geogeo/G05R00C00
@@ -133,6 +120,19 @@
     #loop: "{{ template_files.files }}"
 
     ########
+
+    - name: Execute Shell Script
+      shell: /home/admin/find_previous_version.sh {{ app_goroco }} {{ target_path }}
+      register: previous_version_result
+      ignore_errors: yes # Ignore errors if the script returns a non-zero exit code
+
+    - name: Set Previous Version Variable
+      set_fact:
+        previous_version: "{{ previous_version_result.stdout | default(omit) }}"
+
+    - name: Display Previous Version
+      debug:
+        var: previous_version
 
     - name: CheckCurrent
       stat:
