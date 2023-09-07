@@ -8,7 +8,7 @@
     source_directory: "{{ playbook_dir }}/templates"
     destination_directory: "/home/admin/geogeo/G05R00C00"
     target_version: H05S01T04
-    target_path: /home/admin/images
+    target_path: /home/admin/geogeo
     app_goroco: G05R00C00
 
   #pre_tasks:
@@ -28,28 +28,46 @@
   #pip: name=docker-py
 
   tasks:
-    #- name: Copy Script to Host
-    # copy:
-    #  src: files/find_previous_version.sh
-    # dest: /home/admin/find_previous_version.sh
-    #mode: "0755" # Set the appropriate permissions
+    - name: Copy Script to Host
+      copy:
+        src: files/find_previous_version.sh
+        dest: /home/admin/find_previous_version.sh
+        mode: "0755" # Set the appropriate permissions
 
-    #- name: Execute Shell Script
-    # shell: /home/admin/find_previous_version.sh {{ target_version }} {{ target_path }}
-    #register: previous_version_result
-    #ignore_errors: yes # Ignore errors if the script returns a non-zero exit code
+    - name: Execute Shell Script
+      shell: /home/admin/find_previous_version.sh {{ target_version }} {{ target_path }}
+      register: previous_version_result
+      ignore_errors: yes # Ignore errors if the script returns a non-zero exit code
 
-    #- name: Set Previous Version Variable
-    # set_fact:
-    #  previous_version: "{{ previous_version_result.stdout | default(omit) }}"
+    - name: Set Previous Version Variable
+      set_fact:
+        previous_version: "{{ previous_version_result.stdout | default(omit) }}"
 
-    #- name: Display Previous Version
-    # debug:
-    #  var: previous_version
+    - name: Display Previous Version
+      debug:
+        var: previous_version
 
     - name: Create Image Folder
       ansible.builtin.file:
         path: /home/admin/geogeo/G05R00C00
+        recurse: yes
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Create Image Folder
+      ansible.builtin.file:
+        path: /home/admin/geogeo/G04R00C00
+        recurse: yes
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Create Image Folder
+      ansible.builtin.file:
+        path: /home/admin/geogeo/G06R00C00
         recurse: yes
         state: directory
         owner: root
