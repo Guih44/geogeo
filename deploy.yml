@@ -42,24 +42,6 @@
         group: root
         mode: 0755
 
-    - name: Create Image Folder
-      ansible.builtin.file:
-        path: /home/admin/geogeo/G04R00C00
-        recurse: yes
-        state: directory
-        owner: root
-        group: root
-        mode: 0755
-
-    - name: Create Image Folder
-      ansible.builtin.file:
-        path: /home/admin/geogeo/G06R00C00
-        recurse: yes
-        state: directory
-        owner: root
-        group: root
-        mode: 0755
-
     - name: CreateGorocoEtcDirectory
       ansible.builtin.file:
         path: "/home/admin/geogeo/G05R00C00/etc"
