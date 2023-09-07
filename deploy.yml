@@ -134,24 +134,17 @@
       debug:
         var: previous_version
 
-    - name: CheckCurrent
-      stat:
-        path: "/home/admin/geogeo/current"
-      register: Current
+    ####
 
     - name: RemoveOldCurrent
       ansible.builtin.file:
         path: "/home/admin/geogeo/current.old"
         state: absent
-      when: Current.stat.exists and app_goroco_test != (Current.stat.lnk_source | basename)
-      vars:
-        app_goroco_test: "{{ app_goroco | default('') }}"
 
-    - name: SaveNewCurrent.Old
-      command: mv "/home/admin/geogeo/current" "/home/admin/geogeo/current.old"
-      when: Current.stat.exists and app_goroco_test != (Current.stat.lnk_source | basename)
-      vars:
-        app_goroco_test: "{{ app_goroco | default('') }}"
+    - name: RemoveOldCurrent
+      ansible.builtin.file:
+        path: "/home/admin/geogeo/current"
+        state: absent
 
     - name: SetCurrent
       ansible.builtin.file:
@@ -161,6 +154,16 @@
         group: root
         follow: no
         state: link
+
+    - name: SetCurrentOld
+      ansible.builtin.file:
+        src: "/home/admin/geogeo/{{ previous_version }}"
+        dest: "/home/admin/geogeo/current.old"
+        owner: root
+        group: root
+        follow: no
+        state: link
+      when: previous_version!= "NOPREVIOUSVERSION"
 
     #- name: Templating File's Project
     # ansible.builtin.template:
